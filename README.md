@@ -40,11 +40,11 @@ Built with Electron and Node.js, PureMac runs 100% locally on your machine. It f
 
 PureMac is available as a standalone macOS application.
 
-### Method 1: Download the DMG
-1. Download the latest `PureMac.dmg` from the **[Releases](https://github.com/SumitWagdare/puremac/releases/latest)** page.
-2. Open the `.dmg` and drag the **PureMac** icon into your **Applications** folder.
-3. Open your Applications folder, **Right-Click (or Control-Click)** on the PureMac app, and select **Open**.
-4. Click **Open** again in the warning dialog to bypass the macOS Gatekeeper check. *(You only need to do this on the first launch).*
+### Method 1: Automatic Installer (.pkg)
+1. Download the latest `PureMac.pkg` from the **[Releases](https://github.com/SumitWagdare/puremac/releases/latest)** page.
+2. Double-click the `.pkg` file.
+3. If macOS Gatekeeper shows a warning saying "the developer cannot be verified", simply **Right-Click (or Control-Click)** on the `.pkg` file, select **Open**, and click **Open** again.
+4. Follow the installation wizard. PureMac will be automatically installed into your Applications folder!
 
 ### Method 2: Build from Source
 If you prefer to run it via terminal or build the DMG yourself:

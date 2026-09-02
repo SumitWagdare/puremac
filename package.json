@@ -24,6 +24,7 @@
     "mac": {
       "category": "public.app-category.utilities",
       "target": [
+        "pkg",
         "dmg"
       ],
       "icon": "icon.icns",
