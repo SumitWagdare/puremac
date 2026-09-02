@@ -53,10 +53,11 @@ function waitForServer(url, cb) {
 }
 
 app.whenReady().then(() => {
-  // Start the Express server
-  serverProcess = fork(path.join(__dirname, 'server.js'), [], {
-    env: { ...process.env, ELECTRON_RUN_AS_NODE: '1', IS_ELECTRON: 'true' }
-  });
+  // Set flag so server.js knows it's inside Electron and doesn't auto-open browser
+  process.env.IS_ELECTRON = 'true';
+  
+  // Require the server directly instead of forking (fixes ASAR archive issues)
+  require('./server.js');
 
   createWindow();
 
@@ -72,8 +73,5 @@ app.on('window-all-closed', () => {
 });
 
 app.on('quit', () => {
-  // Kill the server when the app quits
-  if (serverProcess) {
-    serverProcess.kill();
-  }
+  // Server runs in main process now, so it will exit automatically when app quits
 });
