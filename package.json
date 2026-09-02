@@ -1,0 +1,44 @@
+{
+  "name": "puremac",
+  "productName": "PureMac",
+  "version": "2.0.0",
+  "description": "Premium Mac Cleanup & Optimization Application",
+  "main": "main.js",
+  "author": "Sumit Wagdare",
+  "license": "MIT",
+  "scripts": {
+    "start": "electron .",
+    "dev": "node server.js",
+    "build:mac": "electron-builder --mac"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5"
+  },
+  "devDependencies": {
+    "electron": "^28.2.1",
+    "electron-builder": "^24.9.1"
+  },
+  "build": {
+    "appId": "com.sumit.puremac",
+    "mac": {
+      "category": "public.app-category.utilities",
+      "target": [
+        "dmg"
+      ],
+      "icon": "icon.icns",
+      "hardenedRuntime": true,
+      "gatekeeperAssess": false
+    },
+    "directories": {
+      "output": "dist",
+      "buildResources": "build"
+    },
+    "files": [
+      "main.js",
+      "server.js",
+      "routes/**/*",
+      "public/**/*"
+    ]
+  }
+}

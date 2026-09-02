@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="PureMac — Premium Mac Cleanup, Optimization & Disk Analysis Suite. Scan for junk, monitor performance, and free up space.">
+  <title>PureMac — Mac Optimization Suite</title>
+  <script src="js/chart.min.js"></script>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ═══ Ambient background ═══ -->
+  <div class="ambient-bg">
+    <div class="ambient-orb orb-1"></div>
+    <div class="ambient-orb orb-2"></div>
+    <div class="ambient-orb orb-3"></div>
+  </div>
+
+  <!-- ═══ App Layout ═══ -->
+  <div class="app-layout">
+
+    <!-- ─── Sidebar ─── -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <div class="sidebar-logo">
+          <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+            <rect width="36" height="36" rx="10" fill="url(#sideLogoGrad)"/>
+            <path d="M11 25L18 11L25 25" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="18" cy="20" r="2.5" fill="white"/>
+            <defs>
+              <linearGradient id="sideLogoGrad" x1="0" y1="0" x2="36" y2="36">
+                <stop stop-color="#6366f1"/>
+                <stop offset="1" stop-color="#a855f7"/>
+              </linearGradient>
+            </defs>
+          </svg>
+          <div class="sidebar-brand">
+            <span class="brand-name">PureMac</span>
+            <span class="brand-version">v2.0</span>
+          </div>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="nav-group">
+          <span class="nav-group-label">Overview</span>
+          <button class="sidebar-btn active" data-page="dashboard" id="navDashboard">
+            <span class="sidebar-icon">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="2" y="2" width="7" height="7" rx="2" stroke="currentColor" stroke-width="1.5"/><rect x="11" y="2" width="7" height="7" rx="2" stroke="currentColor" stroke-width="1.5"/><rect x="2" y="11" width="7" height="7" rx="2" stroke="currentColor" stroke-width="1.5"/><rect x="11" y="11" width="7" height="7" rx="2" stroke="currentColor" stroke-width="1.5"/></svg>
+            </span>
+            <span class="sidebar-label">Dashboard</span>
+          </button>
+          <button class="sidebar-btn" data-page="monitor" id="navMonitor">
+            <span class="sidebar-icon">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M2 15L6 9L10 12L14 6L18 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            <span class="sidebar-label">Monitor</span>
+            <span class="sidebar-badge live">LIVE</span>
+          </button>
+        </div>
+
+        <div class="nav-group">
+          <span class="nav-group-label">Cleanup</span>
+          <button class="sidebar-btn" data-page="scanner" id="navScanner">
+            <span class="sidebar-icon">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M17 17L13.5 13.5M15 9C15 12.3137 12.3137 15 9 15C5.68629 15 3 12.3137 3 9C3 5.68629 5.68629 3 9 3C12.3137 3 15 5.68629 15 9Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            </span>
+            <span class="sidebar-label">App Junk</span>
+          </button>
+          <button class="sidebar-btn" data-page="browser" id="navBrowser">
+            <span class="sidebar-icon">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M3 10H17M10 3C12 5 13 7.5 13 10C13 12.5 12 15 10 17M10 3C8 5 7 7.5 7 10C7 12.5 8 15 10 17" stroke="currentColor" stroke-width="1.5"/></svg>
+            </span>
+            <span class="sidebar-label">Browser Cache</span>
+          </button>
+          <button class="sidebar-btn" data-page="devjunk" id="navDevJunk">
+            <span class="sidebar-icon">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7 7L3 10L7 13M13 7L17 10L13 13M11 4L9 16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            <span class="sidebar-label">Developer</span>
+          </button>
+        </div>
+
+        <div class="nav-group">
+          <span class="nav-group-label">Analysis</span>
+          <button class="sidebar-btn" data-page="analysis" id="navAnalysis">
+            <span class="sidebar-icon">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M17 17H3V3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><rect x="5" y="9" width="3" height="8" rx="1" stroke="currentColor" stroke-width="1.5"/><rect x="9" y="5" width="3" height="12" rx="1" stroke="currentColor" stroke-width="1.5"/><rect x="13" y="7" width="3" height="10" rx="1" stroke="currentColor" stroke-width="1.5"/></svg>
+            </span>
+            <span class="sidebar-label">Disk Analysis</span>
+          </button>
+          <button class="sidebar-btn" data-page="large" id="navLarge">
+            <span class="sidebar-icon">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 5H16M4 5V15C4 15.5523 4.44772 16 5 16H15C15.5523 16 16 15.5523 16 15V5M4 5L5 3H15L16 5M8 9V13M12 9V13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            <span class="sidebar-label">Large Files</span>
+          </button>
+        </div>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="sidebar-disk-mini">
+          <div class="disk-mini-bar">
+            <div class="disk-mini-fill" id="sidebarDiskFill"></div>
+          </div>
+          <span class="disk-mini-text" id="sidebarDiskText">Loading...</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ─── Main Content ─── -->
+    <main class="main-content" id="mainContent">
+
+      <!-- ═══ DASHBOARD ═══ -->
+      <div class="page active" id="pageDashboard">
+        <div class="page-header">
+          <div>
+            <h2 class="page-title">Dashboard</h2>
+            <p class="page-subtitle">Your Mac's health at a glance</p>
+          </div>
+          <div class="page-actions">
+            <button class="btn btn-primary btn-glow" id="btnQuickScan">
+              <span class="btn-icon">⚡</span> Quick Scan
+            </button>
+          </div>
+        </div>
+
+        <!-- Health Score Hero -->
+        <div class="hero-row">
+          <div class="glass-card health-hero">
+            <div class="health-gauge-wrapper">
+              <svg class="health-gauge" viewBox="0 0 200 200">
+                <circle class="gauge-bg" cx="100" cy="100" r="85" />
+                <circle class="gauge-fill" id="gaugeCircle" cx="100" cy="100" r="85" />
+              </svg>
+              <div class="health-center">
+                <span class="health-score" id="healthScore">—</span>
+                <span class="health-grade" id="healthGrade">—</span>
+              </div>
+            </div>
+            <div class="health-info">
+              <h3>System Health</h3>
+              <div class="health-factors" id="healthFactors"></div>
+            </div>
+          </div>
+
+          <div class="quick-stats-col">
+            <div class="glass-card mini-stat" style="--accent: #6366f1">
+              <div class="mini-stat-icon">💾</div>
+              <div class="mini-stat-data">
+                <span class="mini-stat-value" id="qsDiskUsed">—</span>
+                <span class="mini-stat-label">Disk Used</span>
+              </div>
+            </div>
+            <div class="glass-card mini-stat" style="--accent: #22c55e">
+              <div class="mini-stat-icon">✅</div>
+              <div class="mini-stat-data">
+                <span class="mini-stat-value" id="qsDiskFree">—</span>
+                <span class="mini-stat-label">Free Space</span>
+              </div>
+            </div>
+            <div class="glass-card mini-stat" style="--accent: #f59e0b">
+              <div class="mini-stat-icon">🗑️</div>
+              <div class="mini-stat-data">
+                <span class="mini-stat-value" id="qsJunk">—</span>
+                <span class="mini-stat-label">Junk Found</span>
+              </div>
+            </div>
+            <div class="glass-card mini-stat" style="--accent: #ef4444">
+              <div class="mini-stat-icon">🧠</div>
+              <div class="mini-stat-data">
+                <span class="mini-stat-value" id="qsMemory">—</span>
+                <span class="mini-stat-label">Memory Used</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dashboard Charts -->
+        <div class="charts-row">
+          <div class="glass-card chart-card">
+            <h3>Disk Usage</h3>
+            <div class="chart-wrap donut-wrap">
+              <canvas id="dashDonut"></canvas>
+              <div class="donut-center-label">
+                <span class="dcl-value" id="donutPct">—</span>
+                <span class="dcl-text">Used</span>
+              </div>
+            </div>
+          </div>
+          <div class="glass-card chart-card">
+            <h3>Storage Breakdown</h3>
+            <div class="chart-wrap">
+              <canvas id="dashCategory"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick Action Cards -->
+        <div class="action-cards">
+          <div class="glass-card action-card" data-goto="scanner">
+            <div class="action-icon" style="background: linear-gradient(135deg, #6366f1, #818cf8)">🔍</div>
+            <div class="action-text">
+              <h4>Scan Junk</h4>
+              <p>Find leftover app data</p>
+            </div>
+            <span class="action-arrow">→</span>
+          </div>
+          <div class="glass-card action-card" data-goto="browser">
+            <div class="action-icon" style="background: linear-gradient(135deg, #3b82f6, #60a5fa)">🌐</div>
+            <div class="action-text">
+              <h4>Browser Cache</h4>
+              <p>Clean browser data</p>
+            </div>
+            <span class="action-arrow">→</span>
+          </div>
+          <div class="glass-card action-card" data-goto="devjunk">
+            <div class="action-icon" style="background: linear-gradient(135deg, #22c55e, #4ade80)">💻</div>
+            <div class="action-text">
+              <h4>Dev Cleanup</h4>
+              <p>Clear build caches</p>
+            </div>
+            <span class="action-arrow">→</span>
+          </div>
+          <div class="glass-card action-card" data-goto="large">
+            <div class="action-icon" style="background: linear-gradient(135deg, #f97316, #fb923c)">📁</div>
+            <div class="action-text">
+              <h4>Large Files</h4>
+              <p>Find space hogs</p>
+            </div>
+            <span class="action-arrow">→</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ MONITOR ═══ -->
+      <div class="page" id="pageMonitor">
+        <div class="page-header">
+          <div>
+            <h2 class="page-title">System Monitor</h2>
+            <p class="page-subtitle">Real-time performance metrics</p>
+          </div>
+          <div class="live-indicator"><span class="live-dot"></span> Live</div>
+        </div>
+
+        <div class="monitor-grid">
+          <div class="glass-card monitor-card">
+            <div class="monitor-header">
+              <span class="monitor-title">CPU Usage</span>
+              <span class="monitor-value" id="monCpuVal">—</span>
+            </div>
+            <div class="ring-gauge-wrap">
+              <svg class="ring-gauge" viewBox="0 0 120 120">
+                <circle class="ring-bg" cx="60" cy="60" r="50"/>
+                <circle class="ring-fill" id="cpuRing" cx="60" cy="60" r="50" style="--ring-color: #6366f1"/>
+              </svg>
+              <span class="ring-center" id="cpuCenter">—%</span>
+            </div>
+            <div class="monitor-detail">
+              <span>User: <b id="cpuUser">—</b>%</span>
+              <span>System: <b id="cpuSys">—</b>%</span>
+            </div>
+          </div>
+
+          <div class="glass-card monitor-card">
+            <div class="monitor-header">
+              <span class="monitor-title">Memory</span>
+              <span class="monitor-value" id="monMemVal">—</span>
+            </div>
+            <div class="ring-gauge-wrap">
+              <svg class="ring-gauge" viewBox="0 0 120 120">
+                <circle class="ring-bg" cx="60" cy="60" r="50"/>
+                <circle class="ring-fill" id="memRing" cx="60" cy="60" r="50" style="--ring-color: #a855f7"/>
+              </svg>
+              <span class="ring-center" id="memCenter">—%</span>
+            </div>
+            <div class="monitor-detail">
+              <span>Used: <b id="memUsed">—</b></span>
+              <span>Free: <b id="memFree">—</b></span>
+            </div>
+          </div>
+
+          <div class="glass-card monitor-card">
+            <div class="monitor-header">
+              <span class="monitor-title">Disk I/O</span>
+              <span class="monitor-value">Activity</span>
+            </div>
+            <div class="io-bars">
+              <div class="io-row">
+                <span class="io-label">Read</span>
+                <div class="io-bar-track"><div class="io-bar-fill io-read" id="ioRead"></div></div>
+                <span class="io-val" id="ioReadVal">—</span>
+              </div>
+              <div class="io-row">
+                <span class="io-label">Write</span>
+                <div class="io-bar-track"><div class="io-bar-fill io-write" id="ioWrite"></div></div>
+                <span class="io-val" id="ioWriteVal">—</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="glass-card monitor-card">
+            <div class="monitor-header">
+              <span class="monitor-title">Network</span>
+              <span class="monitor-value">Traffic</span>
+            </div>
+            <div class="io-bars">
+              <div class="io-row">
+                <span class="io-label">↓ In</span>
+                <div class="io-bar-track"><div class="io-bar-fill io-netin" id="netIn"></div></div>
+                <span class="io-val" id="netInVal">—</span>
+              </div>
+              <div class="io-row">
+                <span class="io-label">↑ Out</span>
+                <div class="io-bar-track"><div class="io-bar-fill io-netout" id="netOut"></div></div>
+                <span class="io-val" id="netOutVal">—</span>
+              </div>
+            </div>
+            <div class="monitor-detail" style="margin-top: 12px">
+              <span>Uptime: <b id="sysUptime">—</b></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ APP JUNK SCANNER ═══ -->
+      <div class="page" id="pageScanner">
+        <div class="page-header">
+          <div>
+            <h2 class="page-title">App Junk Scanner</h2>
+            <p class="page-subtitle">Leftover files from uninstalled applications</p>
+          </div>
+          <button class="btn btn-primary btn-glow" id="btnScanJunk">
+            <span class="btn-icon">🔍</span> Scan Now
+          </button>
+        </div>
+
+        <div class="glass-card scan-progress-card hidden" id="junkProgress">
+          <div class="scan-timeline" id="scanTimeline">
+            <div class="timeline-step active" data-step="1">
+              <div class="timeline-dot"></div>
+              <span>Checking installed apps</span>
+            </div>
+            <div class="timeline-step" data-step="2">
+              <div class="timeline-dot"></div>
+              <span>Scanning Application Support</span>
+            </div>
+            <div class="timeline-step" data-step="3">
+              <div class="timeline-dot"></div>
+              <span>Scanning Caches</span>
+            </div>
+            <div class="timeline-step" data-step="4">
+              <div class="timeline-dot"></div>
+              <span>Scanning Containers</span>
+            </div>
+            <div class="timeline-step" data-step="5">
+              <div class="timeline-dot"></div>
+              <span>Calculating sizes</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hidden" id="junkResults">
+          <div class="glass-card junk-summary-card">
+            <div class="junk-summary-left">
+              <span class="junk-big-label">Total Junk Found</span>
+              <span class="junk-big-value" id="junkTotalSize">—</span>
+            </div>
+            <div class="junk-summary-stats">
+              <div class="jss"><span class="jss-val" id="junkAppCount">0</span><span class="jss-label">Apps</span></div>
+              <div class="jss"><span class="jss-val" id="junkFileCount">0</span><span class="jss-label">Files</span></div>
+            </div>
+            <button class="btn btn-danger btn-glow" id="btnCleanJunk"><span class="btn-icon">🧹</span> Clean All</button>
+          </div>
+
+          <div class="glass-card chart-card">
+            <h3>Junk by Application</h3>
+            <div class="chart-wrap chart-wrap-wide"><canvas id="junkBarChart"></canvas></div>
+          </div>
+
+          <div class="junk-app-list" id="junkAppList"></div>
+        </div>
+      </div>
+
+      <!-- ═══ BROWSER CACHE ═══ -->
+      <div class="page" id="pageBrowser">
+        <div class="page-header">
+          <div>
+            <h2 class="page-title">Browser Cache</h2>
+            <p class="page-subtitle">Clean cached data from web browsers</p>
+          </div>
+          <button class="btn btn-primary btn-glow" id="btnScanBrowser"><span class="btn-icon">🌐</span> Scan Browsers</button>
+        </div>
+        <div class="cleanup-grid" id="browserGrid"></div>
+      </div>
+
+      <!-- ═══ DEVELOPER JUNK ═══ -->
+      <div class="page" id="pageDevjunk">
+        <div class="page-header">
+          <div>
+            <h2 class="page-title">Developer Cleanup</h2>
+            <p class="page-subtitle">Build caches, package managers, and IDE leftovers</p>
+          </div>
+          <button class="btn btn-primary btn-glow" id="btnScanDev"><span class="btn-icon">💻</span> Scan Developer Data</button>
+        </div>
+        <div class="cleanup-grid" id="devGrid"></div>
+      </div>
+
+      <!-- ═══ DISK ANALYSIS ═══ -->
+      <div class="page" id="pageAnalysis">
+        <div class="page-header">
+          <div>
+            <h2 class="page-title">Disk Analysis</h2>
+            <p class="page-subtitle">Detailed breakdown of your storage</p>
+          </div>
+        </div>
+        <div class="charts-row">
+          <div class="glass-card chart-card">
+            <h3>Storage Distribution</h3>
+            <div class="chart-wrap"><canvas id="analysisPie"></canvas></div>
+          </div>
+          <div class="glass-card chart-card">
+            <h3>Size Comparison</h3>
+            <div class="chart-wrap chart-wrap-wide"><canvas id="analysisBar"></canvas></div>
+          </div>
+        </div>
+        <div class="category-grid" id="catGrid"></div>
+      </div>
+
+      <!-- ═══ LARGE FILES ═══ -->
+      <div class="page" id="pageLarge">
+        <div class="page-header">
+          <div>
+            <h2 class="page-title">Large Files</h2>
+            <p class="page-subtitle">Files over 50 MB consuming the most space</p>
+          </div>
+          <button class="btn btn-primary btn-glow" id="btnScanLarge"><span class="btn-icon">📁</span> Find Large Files</button>
+        </div>
+        <div class="large-files-list" id="largeFilesList"></div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- ═══ Toast ═══ -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- ═══ Modal ═══ -->
+  <div class="modal-overlay hidden" id="modalOverlay">
+    <div class="glass-card modal-card">
+      <h3 id="modalTitle">Confirm Cleanup</h3>
+      <p id="modalMessage">This action cannot be undone.</p>
+      <div class="modal-actions">
+        <button class="btn btn-ghost" id="modalCancel">Cancel</button>
+        <button class="btn btn-danger" id="modalConfirm"><span class="btn-icon">🧹</span> Clean Now</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
