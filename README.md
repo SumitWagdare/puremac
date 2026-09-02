@@ -12,18 +12,7 @@
 
 </div>
 
----
-
 <div align="center">
-  
-  *(Showcase Video Placeholder - drop demo.mp4 in assets/)*
-  
-  <video src="assets/demo.mp4" controls="controls" width="100%" style="max-width: 800px;">
-    Your browser does not support the video tag.
-  </video>
-
-  <br>
-
   <img src="assets/screenshot1.png" alt="PureMac Dashboard" width="49%">
   <img src="assets/screenshot2.png" alt="PureMac Monitor" width="49%">
   <img src="assets/screenshot3.png" alt="PureMac Scanner" width="49%">
