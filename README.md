@@ -14,6 +14,24 @@
 
 ---
 
+<div align="center">
+  
+  *(Drop your showcase video here as `assets/demo.mp4`)*
+  
+  <video src="assets/demo.mp4" controls="controls" width="100%" style="max-width: 800px;">
+    Your browser does not support the video tag.
+  </video>
+
+  <br>
+
+  *(Drop your UI screenshots in the assets folder as well)*
+
+  <img src="assets/screenshot1.png" alt="PureMac Dashboard" width="49%">
+  <img src="assets/screenshot2.png" alt="PureMac Monitor" width="49%">
+</div>
+
+---
+
 ## 🚀 Why PureMac?
 Most Mac cleanup tools are expensive subscriptions or intrusive software that track your usage. **PureMac is different.** 
 Built with Electron and Node.js, PureMac runs 100% locally on your machine. It features an Apple-inspired dark glassmorphic design and gives you complete control over what gets cleaned.
